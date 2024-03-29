@@ -13,8 +13,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model TaskList {
+  id        Int      @default(autoincrement()) @id
+  name     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status Status
+  description Description?
+  // Many to One
+  tasks Task[]
+  // Many to Many
+  tags Tag[]
+  
+}
+
+
 model Task {
   id        Int      @default(autoincrement()) @id
   name     String
   isDone Boolean? @default(false)
+  list TaskList @relation(fields: [listId], references: [id])
+  listId Int
+}
+
+model Tag {
+  id Int @default(autoincrement()) @id
+  content String
+  products TaskList[]
+}
+
+model Description {
+  id Int @default(autoincrement()) @id
+  content String
+  product TaskList @relation(fields: [listId], references: [id])
+  listId Int @unique
+}
+
+enum Status {
+  OLD
+  NEW
 }
