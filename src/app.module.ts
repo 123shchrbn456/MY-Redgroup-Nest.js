@@ -3,6 +3,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { TaskModule } from "./task/task.module";
 import { TaskListModule } from './task-list/task-list.module';
+import { MyTryModule } from './my-try/my-try.module';
 
 //Модуль это типо плата на которую мы всё коннектим, условно как материнская плата в ПК
 
@@ -10,7 +11,7 @@ import { TaskListModule } from './task-list/task-list.module';
 // (Чаще всего нужен для авторизации и тд, например в моменте проверяем request в него записываем нашего юзера и потом этого юзера можем распаковать в контроллере)
 
 @Module({
-    imports: [TaskModule, TaskListModule],
+    imports: [TaskModule, TaskListModule, MyTryModule],
     // Контроллер отвечает лишь за получение данных, за их валидацию и за их отдачу(таймкод 8:00)
     controllers: [AppController],
     // Сервисы(Провайдеры) отвечают за выполнение какой то логики
